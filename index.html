@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SnapFetch | Free Video Downloader</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(22, 27, 46, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --primary: #6366f1;
+      --primary-hover: #4f46e5;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-gradient: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.12) 0px, transparent 50%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: var(--text-main);
+      padding: 24px 16px;
+    }
+
+    /* Navbar */
+    .navbar {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0 40px;
+    }
+    .logo {
+      font-size: 20px;
+      font-weight: 800;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .badge {
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      color: #a5b4fc;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* Ad Slot Placeholder Top */
+    .ad-banner-top {
+      width: 100%;
+      max-width: 728px;
+      min-height: 90px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px dashed rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #475569;
+      font-size: 13px;
+      margin-bottom: 30px;
+    }
+
+    /* Hero / Converter Card */
+    .hero {
+      text-align: center;
+      max-width: 640px;
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    .hero span {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 32px;
+      width: 100%;
+      max-width: 600px;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    }
+
+    .input-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    @media (min-width: 640px) {
+      .input-wrapper {
+        flex-direction: row;
+      }
+    }
+
+    input[type="text"] {
+      flex: 1;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 16px 20px;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      transition: all 0.2s;
+    }
+    input[type="text"]:focus {
+      border-color: #818cf8;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+    }
+
+    .btn-fetch {
+      background: var(--accent-gradient);
+      border: none;
+      color: white;
+      padding: 16px 28px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform 0.15s, opacity 0.2s;
+    }
+    .btn-fetch:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+    }
+    .btn-fetch:active {
+      transform: translateY(0);
+    }
+
+    /* Result Area */
+    #result {
+      margin-top: 24px;
+      display: none;
+    }
+    .result-card {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      animation: fadeIn 0.3s ease;
+    }
+    .btn-download {
+      background: #10b981;
+      color: white;
+      padding: 14px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+    .btn-download:hover {
+      background: #059669;
+    }
+
+    .status-msg {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .error-msg {
+      color: #f87171;
+      font-size: 14px;
+      margin-top: 12px;
+    }
+
+    /* Supported Platforms */
+    .supported {
+      margin-top: 24px;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+    .supported span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">⚡ SnapFetch</div>
+    <div class="badge">Fast & Free</div>
+  </nav>
+
+  <!-- Top Ad Placement Area -->
+  <div class="ad-banner-top" id="adSlotTop">
+    [ 728x90 Ad Banner Placement ]
+  </div>
+
+  <section class="hero">
+    <h1>Download Video in <span>Full HD</span></h1>
+    <p>Free, fast, and watermark-free downloads for Pinterest & Instagram.</p>
+  </section>
+
+  <div class="card">
+    <div class="input-wrapper">
+      <input type="text" id="videoUrl" placeholder="Paste Pinterest or Instagram URL..." autocomplete="off" />
+      <button class="btn-fetch" onclick="downloadVideo()">Fetch Video</button>
+    </div>
+
+    <div id="statusArea" style="margin-top: 16px; text-align: center;"></div>
+    
+    <div id="result">
+      <div class="result-card">
+        <p style="color: #4ade80; font-weight: 600;">✓ Ready to Download</p>
+        <a href="#" id="downloadLink" target="_blank" rel="noopener noreferrer" class="btn-download">
+          Download MP4 (High Quality)
+        </a>
+      </div>
+    </div>
+
+    <div class="supported">
+      <span>● Pinterest Pins</span>
+      <span>● Instagram Reels</span>
+      <span>● No Watermark</span>
+    </div>
+  </div>
+
+<script>
+const BACKEND_URL = "https://video-downloader-backend-kb9b.onrender.com";
+
+async function downloadVideo() {
+  const urlInput = document.getElementById('videoUrl');
+  const statusArea = document.getElementById('statusArea');
+  const resultDiv = document.getElementById('result');
+  const downloadLink = document.getElementById('downloadLink');
+
+  const url = urlInput.value.trim();
+  if (!url) {
+    statusArea.innerHTML = "<p class='error-msg'>Please enter a video link first.</p>";
+    return;
+  }
+
+  resultDiv.style.display = "none";
+  statusArea.innerHTML = "<p class='status-msg'>Fetching media stream... Please wait a few seconds.</p>";
+
+  try {
+    const res = await fetch(`${BACKEND_URL}/download?url=${encodeURIComponent(url)}`);
+    const data = await res.json();
+
+    if (data.download_url) {
+      statusArea.innerHTML = "";
+      downloadLink.href = data.download_url;
+      resultDiv.style.display = "block";
+    } else {
+      statusArea.innerHTML = "<p class='error-msg'>Could not extract download link. Make sure the pin/reel is public.</p>";
+    }
+  } catch (err) {
+    statusArea.innerHTML = "<p class='error-msg'>Unable to reach server. Please try again in a moment.</p>";
+  }
+}
+</script>
+
+</body>
+</html>
