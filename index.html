@@ -3,20 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SnapFetch | Free Video Downloader</title>
+  <title>SnapFetch | Free Instagram & Pinterest HD Video Downloader</title>
+  <meta name="description" content="Download Instagram Reels and Pinterest Videos in Full HD 1080p MP4 without watermark. Fast, free, and secure online video downloader.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #090d16;
-      --card-bg: rgba(22, 27, 46, 0.7);
-      --card-border: rgba(255, 255, 255, 0.08);
+      --bg: #070a12;
+      --surface: #0f1422;
+      --card-bg: rgba(19, 25, 43, 0.75);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(99, 102, 241, 0.45);
       --primary: #6366f1;
-      --primary-hover: #4f46e5;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
-      --accent-gradient: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+      --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
     }
 
     * {
@@ -26,78 +28,146 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
+    html { scroll-behavior: smooth; }
+
     body {
       background-color: var(--bg);
-      background-image: 
-        radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.12) 0px, transparent 50%);
+      background-image:
+        radial-gradient(circle at 15% 10%, rgba(99, 102, 241, 0.16) 0%, transparent 45%),
+        radial-gradient(circle at 85% 25%, rgba(236, 72, 153, 0.12) 0%, transparent 45%);
+      color: var(--text-main);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      color: var(--text-main);
-      padding: 24px 16px;
+      line-height: 1.6;
     }
 
-    /* Navbar */
-    .navbar {
+    /* Header / Navbar */
+    header {
       width: 100%;
-      max-width: 900px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(7, 10, 18, 0.8);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .nav-container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 16px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 16px 0 40px;
     }
     .logo {
-      font-size: 20px;
+      font-size: 21px;
       font-weight: 800;
-      background: var(--accent-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      color: #fff;
     }
-    .badge {
-      background: rgba(99, 102, 241, 0.15);
-      border: 1px solid rgba(99, 102, 241, 0.3);
-      color: #a5b4fc;
-      padding: 4px 12px;
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: var(--accent-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+    .nav-links {
+      display: none;
+      gap: 28px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    @media (min-width: 768px) {
+      .nav-links { display: flex; }
+    }
+    .badge-live {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+      padding: 5px 12px;
       border-radius: 999px;
       font-size: 12px;
       font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dot {
+      width: 7px;
+      height: 7px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #10b981;
     }
 
-    /* Ad Slot Placeholder Top */
-    .ad-banner-top {
+    /* Main Container */
+    main {
+      width: 100%;
+      max-width: 1080px;
+      padding: 28px 20px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Ad Slots */
+    .ad-slot {
       width: 100%;
       max-width: 728px;
       min-height: 90px;
-      background: rgba(255, 255, 255, 0.02);
+      background: rgba(255, 255, 255, 0.015);
       border: 1px dashed rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #475569;
-      font-size: 13px;
-      margin-bottom: 30px;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      margin: 12px 0 28px;
+      overflow: hidden;
     }
 
-    /* Hero / Converter Card */
+    /* Hero Section */
     .hero {
       text-align: center;
-      max-width: 640px;
-      margin-bottom: 28px;
+      max-width: 680px;
+      margin-bottom: 30px;
+    }
+    .pill-tag {
+      display: inline-block;
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid rgba(99, 102, 241, 0.28);
+      color: #a5b4fc;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 999px;
+      margin-bottom: 16px;
     }
     .hero h1 {
-      font-size: 38px;
+      font-size: clamp(32px, 5vw, 48px);
       font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 12px;
-      letter-spacing: -0.02em;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
     }
-    .hero span {
+    .hero h1 span {
       background: var(--accent-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -107,84 +177,142 @@
       font-size: 16px;
     }
 
-    .card {
-      background: var(--card-bg);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 32px;
+    /* Downloader Box */
+    .tool-card {
       width: 100%;
-      max-width: 600px;
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+      max-width: 680px;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.65);
     }
 
-    .input-wrapper {
+    .input-group {
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
     @media (min-width: 640px) {
-      .input-wrapper {
+      .input-group {
         flex-direction: row;
+        background: rgba(9, 13, 24, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        padding: 6px;
+        border-radius: 15px;
+      }
+      .input-group:focus-within {
+        border-color: #818cf8;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
       }
     }
 
-    input[type="text"] {
+    .input-field-wrap {
       flex: 1;
-      background: rgba(15, 23, 42, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      background: rgba(9, 13, 24, 0.85);
       border-radius: 12px;
+      padding-right: 8px;
+    }
+    @media (min-width: 640px) {
+      .input-field-wrap { background: transparent; }
+    }
+
+    input[type="text"] {
+      width: 100%;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 15px 16px;
       color: #fff;
       font-size: 15px;
       outline: none;
-      transition: all 0.2s;
     }
-    input[type="text"]:focus {
-      border-color: #818cf8;
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+    @media (min-width: 640px) {
+      input[type="text"] { border: none; }
+    }
+
+    .btn-paste {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cbd5e1;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .btn-paste:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
     }
 
     .btn-fetch {
       background: var(--accent-gradient);
       border: none;
-      color: white;
-      padding: 16px 28px;
-      border-radius: 12px;
+      color: #fff;
+      padding: 15px 28px;
+      border-radius: 11px;
       font-size: 15px;
       font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
-      transition: transform 0.15s, opacity 0.2s;
+      transition: opacity 0.2s, transform 0.15s;
     }
-    .btn-fetch:hover {
-      opacity: 0.95;
-      transform: translateY(-1px);
-    }
-    .btn-fetch:active {
-      transform: translateY(0);
-    }
+    .btn-fetch:hover { opacity: 0.92; transform: translateY(-1px); }
+    .btn-fetch:disabled { opacity: 0.6; cursor: not-allowed; }
 
-    /* Result Area */
+    /* Spinner */
+    .loader {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2.5px solid rgba(255,255,255,0.2);
+      border-top-color: #818cf8;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Result Box */
     #result {
       margin-top: 24px;
       display: none;
     }
-    .result-card {
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
+    .result-box {
+      background: rgba(9, 13, 24, 0.9);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 16px;
       padding: 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 14px;
-      animation: fadeIn 0.3s ease;
+      gap: 16px;
+      animation: fadeUp 0.35s ease;
+    }
+    .video-preview {
+      width: 100%;
+      max-height: 340px;
+      border-radius: 12px;
+      background: #000;
+    }
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      width: 100%;
     }
     .btn-download {
       background: #10b981;
-      color: white;
-      padding: 14px 28px;
+      color: #fff;
+      padding: 13px 26px;
       border-radius: 10px;
       text-decoration: none;
       font-weight: 700;
@@ -194,116 +322,68 @@
       gap: 8px;
       transition: background 0.2s;
     }
-    .btn-download:hover {
-      background: #059669;
-    }
+    .btn-download:hover { background: #059669; }
 
-    .status-msg {
-      font-size: 14px;
-      color: var(--text-muted);
-    }
-    .error-msg {
-      color: #f87171;
-      font-size: 14px;
-      margin-top: 12px;
-    }
-
-    /* Supported Platforms */
-    .supported {
-      margin-top: 24px;
+    .platform-pills {
+      margin-top: 20px;
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      gap: 16px;
+      gap: 10px;
+    }
+    .pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 12px;
       color: var(--text-muted);
-      font-size: 13px;
-    }
-    .supported span {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* Sections (How-To & Features) */
+    .section {
+      width: 100%;
+      margin-top: 64px;
     }
-  </style>
-</head>
-<body>
-
-  <nav class="navbar">
-    <div class="logo">⚡ SnapFetch</div>
-    <div class="badge">Fast & Free</div>
-  </nav>
-
-  <!-- Top Ad Placement Area -->
-  <div class="ad-banner-top" id="adSlotTop">
-    [ 728x90 Ad Banner Placement ]
-  </div>
-
-  <section class="hero">
-    <h1>Download Video in <span>Full HD</span></h1>
-    <p>Free, fast, and watermark-free downloads for Pinterest & Instagram.</p>
-  </section>
-
-  <div class="card">
-    <div class="input-wrapper">
-      <input type="text" id="videoUrl" placeholder="Paste Pinterest or Instagram URL..." autocomplete="off" />
-      <button class="btn-fetch" onclick="downloadVideo()">Fetch Video</button>
-    </div>
-
-    <div id="statusArea" style="margin-top: 16px; text-align: center;"></div>
-    
-    <div id="result">
-      <div class="result-card">
-        <p style="color: #4ade80; font-weight: 600;">✓ Ready to Download</p>
-        <a href="#" id="downloadLink" target="_blank" rel="noopener noreferrer" class="btn-download">
-          Download MP4 (High Quality)
-        </a>
-      </div>
-    </div>
-
-    <div class="supported">
-      <span>● Pinterest Pins</span>
-      <span>● Instagram Reels</span>
-      <span>● No Watermark</span>
-    </div>
-  </div>
-
-<script>
-const BACKEND_URL = "https://video-downloader-backend-kb9b.onrender.com";
-
-async function downloadVideo() {
-  const urlInput = document.getElementById('videoUrl');
-  const statusArea = document.getElementById('statusArea');
-  const resultDiv = document.getElementById('result');
-  const downloadLink = document.getElementById('downloadLink');
-
-  const url = urlInput.value.trim();
-  if (!url) {
-    statusArea.innerHTML = "<p class='error-msg'>Please enter a video link first.</p>";
-    return;
-  }
-
-  resultDiv.style.display = "none";
-  statusArea.innerHTML = "<p class='status-msg'>Fetching media stream... Please wait a few seconds.</p>";
-
-  try {
-    const res = await fetch(`${BACKEND_URL}/download?url=${encodeURIComponent(url)}`);
-    const data = await res.json();
-
-    if (data.download_url) {
-      statusArea.innerHTML = "";
-      downloadLink.href = data.download_url;
-      resultDiv.style.display = "block";
-    } else {
-      statusArea.innerHTML = "<p class='error-msg'>Could not extract download link. Make sure the pin/reel is public.</p>";
+    .section-header {
+      text-align: center;
+      margin-bottom: 32px;
     }
-  } catch (err) {
-    statusArea.innerHTML = "<p class='error-msg'>Unable to reach server. Please try again in a moment.</p>";
-  }
-}
-</script>
+    .section-header h2 {
+      font-size: 26px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 15px;
+    }
 
-</body>
-</html>
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    @media (min-width: 768px) {
+      .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .feature-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+    }
+    .step-num {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: rgba(99, 102, 241, 0.15);
+      color: #818cf8;
+      font-weight: 800;
+      display: flex;
