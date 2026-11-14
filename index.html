@@ -121,28 +121,33 @@
     main {
       width: 100%;
       max-width: 1080px;
-      padding: 28px 20px 60px;
+      padding: 36px 20px 60px;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    /* Ad Slots */
-    .ad-slot {
+    /* Native Ad Wrapper */
+    .ad-container {
       width: 100%;
-      max-width: 728px;
-      min-height: 90px;
-      background: rgba(255, 255, 255, 0.015);
-      border: 1px dashed rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
+      max-width: 740px;
+      margin: 28px auto 0;
+      padding: 12px;
+      background: rgba(15, 20, 34, 0.6);
+      border: 1px solid var(--border);
+      border-radius: 14px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      color: #475569;
-      font-size: 12px;
-      letter-spacing: 0.5px;
-      margin: 12px 0 28px;
       overflow: hidden;
+    }
+    .ad-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #64748b;
+      margin-bottom: 6px;
     }
 
     /* Hero Section */
@@ -345,7 +350,7 @@
     /* Sections (How-To & Features) */
     .section {
       width: 100%;
-      margin-top: 64px;
+      margin-top: 56px;
     }
     .section-header {
       text-align: center;
@@ -469,11 +474,6 @@
   </header>
 
   <main>
-    <!-- Top Ad Banner Slot -->
-    <div class="ad-slot" id="adSlotTop">
-      [ Top 728x90 Ad Banner Slot ]
-    </div>
-
     <section class="hero">
       <div class="pill-tag">✨ No Watermark • Unlimited HD Downloads</div>
       <h1>Download Videos in <span>Full HD 1080p</span></h1>
@@ -511,9 +511,11 @@
       </div>
     </div>
 
-    <!-- Middle Ad Banner Slot (High CTR Area) -->
-    <div class="ad-slot" id="adSlotMiddle" style="margin-top: 32px;">
-      [ Middle Native / 728x90 Ad Slot ]
+    <!-- Adsterra Native Banner Slot -->
+    <div class="ad-container">
+      <span class="ad-label">Sponsored</span>
+      <script async="async" data-cfasync="false" src="https://bauval.org/21/556928216839d7b4cbb30f694da49127"></script>
+      <div id="container-556928216839d7b4cbb30f694da49127"></div>
     </div>
 
     <!-- How It Works -->
