@@ -387,4 +387,257 @@
       color: #818cf8;
       font-weight: 800;
       display: flex;
-  
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      font-size: 15px;
+    }
+    .feature-card h3 {
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+    .feature-card p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* FAQ */
+    .faq-list {
+      max-width: 740px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    details {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+    }
+    summary {
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 15px;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    details p {
+      margin-top: 10px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* Footer */
+    footer {
+      width: 100%;
+      border-top: 1px solid var(--border);
+      padding: 28px 20px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-top: auto;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <div class="logo-icon">⚡</div>
+        <span>SnapFetch</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#how-to">How it Works</a>
+        <a href="#features">Features</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="badge-live">
+        <span class="dot"></span> 100% Free & Online
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Top Ad Banner Slot -->
+    <div class="ad-slot" id="adSlotTop">
+      [ Top 728x90 Ad Banner Slot ]
+    </div>
+
+    <section class="hero">
+      <div class="pill-tag">✨ No Watermark • Unlimited HD Downloads</div>
+      <h1>Download Videos in <span>Full HD 1080p</span></h1>
+      <p>Save Instagram Reels, Posts, and Pinterest Videos directly to your device in one click.</p>
+    </section>
+
+    <div class="tool-card">
+      <div class="input-group">
+        <div class="input-field-wrap">
+          <input type="text" id="videoUrl" placeholder="Paste Instagram or Pinterest video link here..." autocomplete="off" />
+          <button type="button" class="btn-paste" onclick="pasteFromClipboard()">Paste</button>
+        </div>
+        <button class="btn-fetch" id="fetchBtn" onclick="downloadVideo()">Fetch Video</button>
+      </div>
+
+      <div id="statusArea" style="margin-top: 16px; text-align: center;"></div>
+
+      <div id="result">
+        <div class="result-box">
+          <span style="color: #34d399; font-weight: 700; font-size: 14px;">✓ Video Extracted Successfully</span>
+          <video id="videoPreview" class="video-preview" controls playsinline></video>
+          <div class="action-row">
+            <a href="#" id="downloadLink" target="_blank" rel="noopener noreferrer" download="SnapFetch_Video.mp4" class="btn-download">
+              ⬇ Download MP4 (HD)
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="platform-pills">
+        <span class="pill">📸 Instagram Reels</span>
+        <span class="pill">📌 Pinterest Pins</span>
+        <span class="pill">⚡ Fast Cloud Extraction</span>
+        <span class="pill">🔒 No Login Required</span>
+      </div>
+    </div>
+
+    <!-- Middle Ad Banner Slot (High CTR Area) -->
+    <div class="ad-slot" id="adSlotMiddle" style="margin-top: 32px;">
+      [ Middle Native / 728x90 Ad Slot ]
+    </div>
+
+    <!-- How It Works -->
+    <section class="section" id="how-to">
+      <div class="section-header">
+        <h2>How to Download Videos</h2>
+        <p>Three simple steps to save any public video in seconds</p>
+      </div>
+      <div class="grid-3">
+        <div class="feature-card">
+          <div class="step-num">1</div>
+          <h3>Copy Video URL</h3>
+          <p>Open Instagram or Pinterest, tap the Share icon on the reel or video pin, and select <strong>Copy Link</strong>.</p>
+        </div>
+        <div class="feature-card">
+          <div class="step-num">2</div>
+          <h3>Paste & Fetch</h3>
+          <p>Click the <strong>Paste</strong> button above and hit <strong>Fetch Video</strong> to extract the clean MP4 stream.</p>
+        </div>
+        <div class="feature-card">
+          <div class="step-num">3</div>
+          <h3>Save MP4 File</h3>
+          <p>Preview your video right on the page and click <strong>Download MP4</strong> to save it to your gallery or PC.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section" id="features">
+      <div class="section-header">
+        <h2>Why Use SnapFetch?</h2>
+        <p>Built for speed, privacy, and original video quality</p>
+      </div>
+      <div class="grid-3">
+        <div class="feature-card">
+          <h3>🚀 Original HD Quality</h3>
+          <p>We fetch the highest available resolution directly from the source without compressing your video.</p>
+        </div>
+        <div class="feature-card">
+          <h3>💧 Zero Watermarks</h3>
+          <p>Clean, watermark-free MP4 files ready to re-use, edit, or watch offline anytime.</p>
+        </div>
+        <div class="feature-card">
+          <h3>📱 Works Everywhere</h3>
+          <p>Fully compatible with Android, iPhone (iOS), Windows, and Mac browsers with zero apps needed.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="section-header">
+        <h2>Frequently Asked Questions</h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>Is SnapFetch completely free to use? <span>+</span></summary>
+          <p>Yes, SnapFetch is 100% free with unlimited daily video downloads. You never need to create an account or sign in.</p>
+        </details>
+        <details>
+          <summary>Why does the first download sometimes take 30–40 seconds? <span>+</span></summary>
+          <p>Our extraction server wakes up automatically when idle. Once active, subsequent videos download within 2–3 seconds.</p>
+        </details>
+        <details>
+          <summary>Can I download private Instagram or Pinterest videos? <span>+</span></summary>
+          <p>No. For user privacy and security, only publicly accessible reels and video pins can be fetched.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 SnapFetch Tools. All rights reserved. Not affiliated with Instagram or Pinterest.</p>
+  </footer>
+
+<script>
+const BACKEND_URL = "https://video-downloader-backend-kb9b.onrender.com";
+
+async function pasteFromClipboard() {
+  try {
+    const text = await navigator.clipboard.readText();
+    document.getElementById('videoUrl').value = text;
+  } catch (err) {
+    document.getElementById('videoUrl').focus();
+  }
+}
+
+async function downloadVideo() {
+  const urlInput = document.getElementById('videoUrl');
+  const statusArea = document.getElementById('statusArea');
+  const resultDiv = document.getElementById('result');
+  const downloadLink = document.getElementById('downloadLink');
+  const videoPreview = document.getElementById('videoPreview');
+  const fetchBtn = document.getElementById('fetchBtn');
+
+  const url = urlInput.value.trim();
+  if (!url) {
+    statusArea.innerHTML = "<p style='color:#f87171; font-size:14px;'>Please paste a valid Instagram or Pinterest link first.</p>";
+    return;
+  }
+
+  resultDiv.style.display = "none";
+  fetchBtn.disabled = true;
+  fetchBtn.innerText = "Fetching...";
+  statusArea.innerHTML = "<p style='color:#94a3b8; font-size:14px;'><span class='loader'></span>Extracting HD video stream... (First request may take ~40s)</p>";
+
+  try {
+    const res = await fetch(`${BACKEND_URL}/download?url=${encodeURIComponent(url)}`);
+    const data = await res.json();
+
+    if (data.download_url) {
+      statusArea.innerHTML = "";
+      downloadLink.href = data.download_url;
+      videoPreview.src = data.download_url;
+      resultDiv.style.display = "block";
+    } else {
+      statusArea.innerHTML = "<p style='color:#f87171; font-size:14px;'>Could not extract video. Please check that the link is public and is a video.</p>";
+    }
+  } catch (err) {
+    statusArea.innerHTML = "<p style='color:#f87171; font-size:14px;'>Server is waking up or unreachable. Please click Fetch Video once more.</p>";
+  } finally {
+    fetchBtn.disabled = false;
+    fetchBtn.innerText = "Fetch Video";
+  }
+}
+</script>
+
+</body>
+</html>
