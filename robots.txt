@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://instapin-hub-downloader.online/sitemap.xml
